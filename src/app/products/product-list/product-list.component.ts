@@ -17,6 +17,26 @@ export class ProductListComponent implements OnInit {
   selectedProduct: Product;
   errorMessage: string;
 
+  // Pagination
+  pageSize = 5;
+  start = 0;
+  end = this.pageSize;
+  currentPage = 1;
+
+  previousPage() {
+    this.start -= this.pageSize;
+    this.end -= this.pageSize;
+    this.selectedProduct = null;
+    this.currentPage--;
+  }
+
+  nextPage() {
+    this.start += this.pageSize;
+    this.end += this.pageSize;
+    this.selectedProduct = null;
+    this.currentPage++;
+  }
+
   onSelect(product: Product): void {
     this.selectedProduct = product;
   }
