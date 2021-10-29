@@ -18,6 +18,7 @@
         <li *ngFor="let product of products | slice:start:end"
             [class.discontinued]="product.discontinued"
             [class.selected]="product === selectedProduct"
+            [title]="product | json"
             (click)="onSelect(product)">
             <span class="name">{{ product.name | uppercase }}</span>
             <span class="description">{{ product.description }}</span>
@@ -31,7 +32,8 @@
             < Previous Page
         </button>
         Page {{ currentPage }}
-        <button (click)="nextPage()">
+        <button (click)="nextPage()"
+                [disabled]="(productsNumber$ | async) <= end">
             Next Page >
         </button>
     </div>
